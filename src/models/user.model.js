@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import jwt from "jsonwebtoken"      // JWT is a bearer token means it like key whoever has this key who access token data 
-import bcrypt from bcrypt
+import bcrypt from 'bcrypt'
 
 
 const userSchema = new Schema({
@@ -65,7 +65,7 @@ userSchema.pre("save", () => async function (next) {
 
 })
 
-userSchema.Schema.methods.isPasswordCorrect = async function (password) {
+userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password)
 }
 
@@ -76,7 +76,7 @@ userSchema.methods.generateAccessToken = async function () {
 
             _id: this._id,
             email: this.email,
-            username: this.username,
+            userName: this.userName,
             fullname: this.fullname
         },
         process.env.ACCESS_TOKEN_SECRET,
@@ -87,10 +87,7 @@ userSchema.methods.generateAccessToken = async function () {
 
 }
 
-userSchema.methods.generateRefreshToken = async function () {
 
-
-}
 
 
 export const User = mongoose.model("User", userSchema);
