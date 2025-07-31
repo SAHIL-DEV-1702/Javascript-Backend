@@ -60,7 +60,7 @@ userSchema.pre("save", () => async function (next) {
 
     if (!this.isModified("password")) return next();   // jar password modified zala nasel tar next() execute kar asel tar else case 
 
-    this.password = bcrypt.hash(this.password, 10)   // he else cas aahe password modify zala asel tar punha bcrpt alo use
+    this.password = await bcrypt.hash(this.password, 10)   // he else cas aahe password modify zala asel tar punha bcrpt alo use
     next()
 
 })
