@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 
 
 const userSchema = new Schema({
-    userName: {
+    username: {
         type: String,
         required: true,
         unique: true,
@@ -23,7 +23,6 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        unique: true,
         lowercase: true,
         trim: true,
     },
@@ -35,9 +34,9 @@ const userSchema = new Schema({
     },
     avatar: {
         type: String,
-        required: true,
+        require: true,
     },
-    coverimage: {
+    coverImage: {
         type: String
     },
     watchHistory: [
@@ -56,7 +55,7 @@ const userSchema = new Schema({
 }, { timestamps: true })
 
 
-userSchema.pre("save", () => async function (next) {
+userSchema.pre("save", async function (next) {
 
     if (!this.isModified("password")) return next();   // jar password modified zala nasel tar next() execute kar asel tar else case 
 
@@ -76,7 +75,7 @@ userSchema.methods.generateAccessToken = async function () {
 
             _id: this._id,
             email: this.email,
-            userName: this.userName,
+            username: this.username,
             fullname: this.fullname
         },
         process.env.ACCESS_TOKEN_SECRET,

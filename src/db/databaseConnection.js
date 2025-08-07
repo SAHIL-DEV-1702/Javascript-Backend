@@ -23,4 +23,15 @@ const connectDB = async () => {
 export default connectDB;
 
 
+// const connectDB1 = async () => {
 
+//     try {
+//         const connectionDATA = await mongoose.connect(`${process.env.MONGODB_URI}/${process.env.DB_NAME}}`)
+
+//         console.log(`\n mongodb connected sucessfully !! DB HOST ${connectionDATA.connection.host}`)       anothrt method to connect
+
+//     }
+//     catch (err) {
+//         console.log(`database connection error`)
+//     }
+// }
